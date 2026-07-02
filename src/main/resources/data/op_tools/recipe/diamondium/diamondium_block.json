@@ -1,0 +1,15 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "###",
+        "###",
+        "###"
+    ],
+    "key": {
+        "#": "op_tools:diamondium_ingot"
+    },
+    "result": {
+        "id": "op_tools:diamondium_block",
+        "count": 1
+    }
+}

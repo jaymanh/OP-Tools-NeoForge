@@ -1,0 +1,46 @@
+{
+  "item.op_tools.diamondium_sword": "Diamondium Sword",
+  "item.op_tools.diamondium_pickaxe": "Diamondium Pickaxe",
+  "item.op_tools.diamondium_axe": "Diamondium Axe",
+  "item.op_tools.diamondium_shovel": "Diamondium Shovel",
+  "item.op_tools.diamondium_hoe": "Diamondium Hoe",
+  "item.op_tools.diamondium_helmet": "Diamondium Helmet",
+  "item.op_tools.diamondium_chestplate": "Diamondium Chestplate",
+  "item.op_tools.diamondium_leggings": "Diamondium Leggings",
+  "item.op_tools.diamondium_boots": "Diamondium Boots",
+
+  "item.op_tools.diamondillium_sword": "Diamondillium Sword",
+  "item.op_tools.diamondillium_pickaxe": "Diamondillium Pickaxe",
+  "item.op_tools.diamondillium_axe": "Diamondillium Axe",
+  "item.op_tools.diamondillium_shovel": "Diamondillium Shovel",
+  "item.op_tools.diamondillium_hoe": "Diamondillium Hoe",
+  "item.op_tools.diamondillium_helmet": "Diamondillium Helmet",
+  "item.op_tools.diamondillium_chestplate": "Diamondillium Chestplate",
+  "item.op_tools.diamondillium_leggings": "Diamondillium Leggings",
+  "item.op_tools.diamondillium_boots": "Diamondillium Boots",
+
+  "item.op_tools.diamondium_ingot": "Diamondium Ingot",
+  "item.op_tools.diamondillium_ingot": "Diamondillium Ingot",
+
+  "item.op_tools.raw_darkmatter": "Raw Darkmatter",
+  "item.op_tools.refined_darkmatter": "Refined Darkmatter",
+  "item.op_tools.super_meat": "Super Meat",
+  "item.op_tools.super_fuel": "Super Fuel",
+
+  "block.op_tools.diamondillium_block": "Diamondillium Block",
+  "block.op_tools.diamondium_block": "Diamondium Block",
+  "block.op_tools.stone_darkmatter_ore": "Darkmatter Ore",
+  "block.op_tools.deepslate_darkmatter_ore": "Deepslate Darkmatter Ore",
+  "block.op_tools.refinery": "Refinery",
+
+  "enchantment.op_tools.auto_replant": "Auto Replant",
+  "enchantment.op_tools.tree_breaker": "Tree Breaker",
+  "enchantment.op_tools.auto_repair": "Auto Repair",
+  "enchantment.op_tools.elemental_fire": "Fire",
+  "enchantment.op_tools.elemental_water": "Water",
+  "enchantment.op_tools.elemental_earth": "Earth",
+  "enchantment.op_tools.elemental_lightning": "Lightning",
+  "enchantment.op_tools.elemental_ice": "Ice",
+
+  "itemGroup.op_tools": "OP Tools"
+}

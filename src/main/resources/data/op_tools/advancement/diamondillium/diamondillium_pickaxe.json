@@ -1,0 +1,19 @@
+{
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "op_tools:diamondillium_ingot"
+          }
+        ]
+      }
+    }
+  },
+  "rewards": {
+    "recipes": [
+      "op_tools:diamondillium/diamondillium_pickaxe"
+    ]
+  }
+}

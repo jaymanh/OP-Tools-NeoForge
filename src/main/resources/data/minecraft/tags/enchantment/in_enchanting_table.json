@@ -1,0 +1,12 @@
+{
+  "values": [
+    "op_tools:auto_repair",
+    "op_tools:auto_replant",
+    "op_tools:elemental_earth",
+    "op_tools:elemental_fire",
+    "op_tools:elemental_lightning",
+    "op_tools:elemental_water",
+    "op_tools:tree_breaker",
+    "minecraft:mending"
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#minecraft:is_overworld",
+  "features": "op_tools:darkmatter_ore_gen",
+  "step": "underground_ores"
+}

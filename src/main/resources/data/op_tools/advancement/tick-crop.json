@@ -1,0 +1,9 @@
+{
+  "criteria": {
+    "tick": {
+      "trigger": "minecraft:tick"
+    }
+  },
+  "rewards":
+    {"function": "op_tools:auto_replant/tick"}
+}

@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "oo",
+        " /",
+        " /"
+    ],
+    "key": {
+        "o": "op_tools:diamondium_ingot",
+        "/": "minecraft:stick"
+    },
+    "result": {
+        "id": "op_tools:diamondium_hoe",
+        "count": 1
+    }
+}
