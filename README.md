@@ -38,7 +38,7 @@ Requirements: **Java 21**, Gradle (wrapper included).
 ./gradlew runServer  # run a dev server
 ```
 
-Built JAR output: `build/libs/op_tools-<version>.jar`
+Built JAR output: `build/libs/op_tools-<version>+<minecraft>.jar` (e.g. `op_tools-1.8.2+1.21.11.jar`)
 
 ## Issues
 
