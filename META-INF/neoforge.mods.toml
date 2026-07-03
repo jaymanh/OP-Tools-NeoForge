@@ -1,0 +1,37 @@
+modLoader="javafml"
+loaderVersion="[1,)"
+license="CC0-1.0"
+
+issueTrackerURL="https://github.com/jaymanh/OP-Tools-NeoForge/issues"
+
+[[mods]]
+
+modId="op_tools"
+
+version="1.8.3"
+
+displayName="OP Tools"
+
+displayURL="https://github.com/jaymanh/OP-Tools-NeoForge"
+
+logoFile="icon.png"
+
+authors="Jaymanh"
+
+description='''
+OP tools is a small mod that adds some overpowered tools and their ores.
+'''
+
+[[dependencies.op_tools]]
+    modId="neoforge"
+    type="required"
+    versionRange="[21.1.234,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.op_tools]]
+    modId="minecraft"
+    type="required"
+    versionRange="[1.21.1]"
+    ordering="NONE"
+    side="BOTH"
