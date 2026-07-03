@@ -1,7 +1,7 @@
 package jaymanh.optools;
 
 import jaymanh.optools.GUI.Screen.RefineryScreenHandler;
-import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
@@ -25,24 +25,17 @@ public class RefineryScreen extends AbstractContainerScreen<RefineryScreenHandle
     }
 
     @Override
-    public void extractBackground(GuiGraphicsExtractor context, int mouseX, int mouseY, float delta) {
+    protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
 
-        context.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, x, y, 0, 0, imageWidth, imageHeight, 256, 256);
-        renderProgressArrow(context, x, y);
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, x, y, 0.0F, 0.0F, imageWidth, imageHeight, 256, 256);
+        renderProgressArrow(guiGraphics, x, y);
     }
 
-    private void renderProgressArrow(GuiGraphicsExtractor context, int x, int y) {
+    private void renderProgressArrow(GuiGraphics guiGraphics, int x, int y) {
         if (menu.isCrafting()) {
-            context.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, x + 85, y + 30, 176, 0, 8, menu.getScaledProgress(), 256, 256);
+            guiGraphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, x + 85, y + 30, 176.0F, 0.0F, 8, menu.getScaledProgress(), 8, menu.getScaledProgress(), 256, 256);
         }
-    }
-
-    @Override
-    public void extractRenderState(GuiGraphicsExtractor context, int mouseX, int mouseY, float delta) {
-        extractBackground(context, mouseX, mouseY, delta);
-        super.extractRenderState(context, mouseX, mouseY, delta);
-        extractTooltip(context, mouseX, mouseY);
     }
 }

@@ -6,7 +6,10 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LightningBolt;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 
@@ -57,7 +60,7 @@ public class ElementalDamageEnchantments {
 
         OpTools.register(Identifier.parse("elemental_lightning"), (world, level, context, user, pos) -> {
             //LOGGER.info("test");
-            LightningBolt lightning = new LightningBolt(EntityTypes.LIGHTNING_BOLT, world);
+            LightningBolt lightning = new LightningBolt(EntityType.LIGHTNING_BOLT, world);
             lightning.setPos(user.getX(), user.getY(), user.getZ());
             lightning.setVisualOnly(false);
             world.addFreshEntity(lightning);

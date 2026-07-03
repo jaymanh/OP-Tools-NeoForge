@@ -26,7 +26,7 @@ public class EnchantTick {
         }
         List<? extends LivingEntity> entitiesList = world.getEntities(EntityTypeTest.forClass(LivingEntity.class), EntitySelector.ENTITY_STILL_ALIVE);
         for (Entity entity : entitiesList) {
-            Set<String> tags = new HashSet<>(entity.entityTags());
+            Set<String> tags = new HashSet<>(entity.getTags());
             for (String cTag : tags) {
                 if (Objects.equals(cTag, "Gravity")) {
                     for (String cTags : tags) {
