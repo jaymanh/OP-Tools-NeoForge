@@ -2,7 +2,7 @@ package jaymanh.optools.Enchantments;
 
 import jaymanh.optools.OpTools;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.Entity;
@@ -55,7 +55,7 @@ public class AutoReplantEnchantment {
     }
 
     public static void initialise() {
-        OpTools.register(Identifier.parse("crop_break"), (world, level, context, user, pos) -> {
+        OpTools.register(ResourceLocation.parse("crop_break"), (world, level, context, user, pos) -> {
             BlockPos blockPos = new BlockPos(
                     (int) Math.floor(pos.x),
                     (int) Math.floor(pos.y),

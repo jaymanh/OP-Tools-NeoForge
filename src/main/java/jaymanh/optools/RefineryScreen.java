@@ -5,13 +5,13 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
 import static jaymanh.optools.OpTools.MOD_ID;
 
 public class RefineryScreen extends AbstractContainerScreen<RefineryScreenHandler> {
-    private static final Identifier TEXTURE = Identifier.fromNamespaceAndPath(MOD_ID, "textures/gui/refinery_gui.png");
+    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(MOD_ID, "textures/gui/refinery_gui.png");
 
     public RefineryScreen(RefineryScreenHandler handler, Inventory inventory, Component title) {
         super(handler, inventory, title);

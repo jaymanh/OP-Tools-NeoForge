@@ -3,7 +3,7 @@ package jaymanh.optools.Enchantments;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import jaymanh.optools.OpTools;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.enchantment.EnchantedItemInUse;
@@ -12,7 +12,7 @@ import net.minecraft.world.phys.Vec3;
 
 import static jaymanh.optools.OpTools.LOGGER;
 
-public record ModEnchantmentsRunCode(Identifier hook) implements EnchantmentEntityEffect {
+public record ModEnchantmentsRunCode(ResourceLocation hook) implements EnchantmentEntityEffect {
     @Override
     public void apply(ServerLevel world, int level, EnchantedItemInUse context, Entity user, Vec3 pos) {
         OpTools.CodeRunner runner = OpTools.get(hook);
@@ -25,7 +25,7 @@ public record ModEnchantmentsRunCode(Identifier hook) implements EnchantmentEnti
     }
 
     public static final MapCodec<ModEnchantmentsRunCode> CODEC = RecordCodecBuilder.mapCodec(
-      instance -> instance.group(Identifier.CODEC.fieldOf("hook").forGetter(ModEnchantmentsRunCode::hook))
+      instance -> instance.group(ResourceLocation.CODEC.fieldOf("hook").forGetter(ModEnchantmentsRunCode::hook))
               .apply(instance, ModEnchantmentsRunCode::new)
     );
 

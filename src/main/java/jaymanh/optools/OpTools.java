@@ -11,7 +11,7 @@ import jaymanh.optools.GUI.Screen.ModScreenHandlers;
 import jaymanh.optools.Items.ModItems;
 import jaymanh.optools.Tools.ModTools;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.inventory.MenuType;
@@ -40,9 +40,9 @@ public class OpTools {
 	public static final DeferredRegister<MenuType<?>> MENU_TYPES = DeferredRegister.create(Registries.MENU, MOD_ID);
 	public static final DeferredRegister<CreativeModeTab> CREATIVE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MOD_ID);
 
-	private static final Map<Identifier, CodeRunner> registry = new HashMap<>();
+	private static final Map<ResourceLocation, CodeRunner> registry = new HashMap<>();
 
-	public static void register(Identifier hook, CodeRunner code) {
+	public static void register(ResourceLocation hook, CodeRunner code) {
 		registry.put(hook, code);
 	}
 
@@ -51,7 +51,7 @@ public class OpTools {
 		void run(ServerLevel world, int level, EnchantedItemInUse context, Entity user, Vec3 pos);
 	}
 
-	public static CodeRunner get(Identifier hook) {
+	public static CodeRunner get(ResourceLocation hook) {
 		return registry.get(hook);
 	}
 
@@ -95,7 +95,7 @@ public class OpTools {
 
 	private void registerEnchantmentEffects(RegisterEvent event) {
 		if (event.getRegistryKey().equals(Registries.ENCHANTMENT_ENTITY_EFFECT_TYPE)) {
-			event.register(Registries.ENCHANTMENT_ENTITY_EFFECT_TYPE, Identifier.fromNamespaceAndPath(MOD_ID, "run_code"), () -> ModEnchantmentsRunCode.CODEC);
+			event.register(Registries.ENCHANTMENT_ENTITY_EFFECT_TYPE, ResourceLocation.fromNamespaceAndPath(MOD_ID, "run_code"), () -> ModEnchantmentsRunCode.CODEC);
 		}
 	}
 }

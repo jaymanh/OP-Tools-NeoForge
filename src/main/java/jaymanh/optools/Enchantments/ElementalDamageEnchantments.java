@@ -3,7 +3,7 @@ package jaymanh.optools.Enchantments;
 import jaymanh.optools.OpTools;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
@@ -35,14 +35,14 @@ public class ElementalDamageEnchantments {
 
 
     public static void initialise(){
-        OpTools.register(Identifier.parse("elemental_fire"), (world, level, context, user, pos) -> {
+        OpTools.register(ResourceLocation.parse("elemental_fire"), (world, level, context, user, pos) -> {
             BlockPos victimBlockPos = user.blockPosition();
             level--;
             createFireRadius(victimBlockPos, world, level);
             //world.setBlockState(victimBlockPos, Blocks.FIRE.getDefaultState());
         });
 
-        OpTools.register(Identifier.parse("elemental_water"), (world, level, context, user, pos) -> {
+        OpTools.register(ResourceLocation.parse("elemental_water"), (world, level, context, user, pos) -> {
             user.setDeltaMovement(user.getDeltaMovement().x,0.02,user.getDeltaMovement().z);
             user.setNoGravity(true);
             user.addTag("Gravity");
@@ -50,7 +50,7 @@ public class ElementalDamageEnchantments {
             world.sendParticles(ParticleTypes.BUBBLE, user.getX(), user.getY(), user.getZ(), 100, 0.5,1,0.5,10);
         });
 
-        OpTools.register(Identifier.parse("elemental_earth"), (world, level, context, user, pos) -> {
+        OpTools.register(ResourceLocation.parse("elemental_earth"), (world, level, context, user, pos) -> {
             user.setDeltaMovement(0,0,0);
             user.setPosRaw(user.getX(), user.getY() - (0.8 * level), user.getZ());
             if(user instanceof Mob mob){
@@ -58,7 +58,7 @@ public class ElementalDamageEnchantments {
             }
         });
 
-        OpTools.register(Identifier.parse("elemental_lightning"), (world, level, context, user, pos) -> {
+        OpTools.register(ResourceLocation.parse("elemental_lightning"), (world, level, context, user, pos) -> {
             //LOGGER.info("test");
             LightningBolt lightning = new LightningBolt(EntityType.LIGHTNING_BOLT, world);
             lightning.setPos(user.getX(), user.getY(), user.getZ());
@@ -66,7 +66,7 @@ public class ElementalDamageEnchantments {
             world.addFreshEntity(lightning);
         });
 
-        OpTools.register(Identifier.parse("elemental_ice"), (world, level, context, user, pos) -> {
+        OpTools.register(ResourceLocation.parse("elemental_ice"), (world, level, context, user, pos) -> {
             //I should probably make my own effect here so it can be a more gradual thing that builds up slowly and wears off slowly
             if(user instanceof LivingEntity mob){
                 mob.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 100, level));

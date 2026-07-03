@@ -8,7 +8,7 @@ import jaymanh.optools.Items.ModItems;
 import jaymanh.optools.OpTools;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.HoeItem;
@@ -22,7 +22,7 @@ import static jaymanh.optools.OpTools.MOD_ID;
 
 public class ModTools {
     public static ResourceKey<Item> key(String id) {
-        Identifier itemId = Identifier.fromNamespaceAndPath(MOD_ID, id);
+        ResourceLocation itemId = ResourceLocation.fromNamespaceAndPath(MOD_ID, id);
         return ResourceKey.create(Registries.ITEM, itemId);
     }
 

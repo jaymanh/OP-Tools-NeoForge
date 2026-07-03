@@ -3,7 +3,7 @@ package jaymanh.optools.Enchantments;
 import jaymanh.optools.OpTools;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.enchantment.EnchantedItemInUse;
@@ -73,7 +73,7 @@ public class TreeBreakerEnchantment {
 
 
     public static void initialise(){
-        OpTools.register(Identifier.parse("tree_breaker_hit"), (world, level, context, user, pos) -> {
+        OpTools.register(ResourceLocation.parse("tree_breaker_hit"), (world, level, context, user, pos) -> {
             BlockPos blockPos = new BlockPos(
                     (int)Math.floor(pos.x),
                     (int)Math.floor(pos.y),

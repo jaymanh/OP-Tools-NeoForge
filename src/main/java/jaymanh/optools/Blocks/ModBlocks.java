@@ -3,7 +3,7 @@ package jaymanh.optools.Blocks;
 import jaymanh.optools.Blocks.CustomBlockTypes.RefineryBlock;
 import jaymanh.optools.OpTools;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -17,7 +17,7 @@ import static jaymanh.optools.OpTools.MOD_ID;
 
 public class ModBlocks {
     public static ResourceKey<Block> key(String id) {
-        Identifier blockId = Identifier.fromNamespaceAndPath(MOD_ID, id);
+        ResourceLocation blockId = ResourceLocation.fromNamespaceAndPath(MOD_ID, id);
         return ResourceKey.create(Registries.BLOCK, blockId);
     }
 
