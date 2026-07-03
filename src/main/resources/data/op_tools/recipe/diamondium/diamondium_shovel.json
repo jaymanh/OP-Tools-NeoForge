@@ -6,11 +6,15 @@
         "/"
     ],
     "key": {
-        "o": "op-tools:diamondium_ingot",
-        "/": "minecraft:stick"
+        "o": {
+            "item": "op_tools:diamondium_ingot"
+        },
+        "/": {
+            "item": "minecraft:stick"
+        }
     },
     "result": {
-        "id": "op-tools:diamondium_shovel",
+        "id": "op_tools:diamondium_shovel",
         "count": 1
     }
 }

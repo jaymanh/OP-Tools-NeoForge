@@ -6,10 +6,12 @@
         "o o"
     ],
     "key": {
-        "o": "op-tools:diamondium_ingot"
+        "o": {
+            "item": "op_tools:diamondium_ingot"
+        }
     },
     "result": {
-        "id": "op-tools:diamondium_leggings",
+        "id": "op_tools:diamondium_leggings",
         "count": 1
     }
 }

@@ -5,10 +5,12 @@
         "o o"
     ],
     "key": {
-        "o": "op-tools:diamondillium_ingot"
+        "o": {
+            "item": "op_tools:diamondillium_ingot"
+        }
     },
     "result": {
-        "id": "op-tools:diamondillium_boots",
+        "id": "op_tools:diamondillium_boots",
         "count": 1
     }
 }

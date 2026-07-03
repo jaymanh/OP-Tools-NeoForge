@@ -6,11 +6,15 @@
         "#n#"
     ],
     "key": {
-        "#": "op-tools:diamondillium_ingot",
-        "n": "op-tools:refined_darkmatter"
+        "#": {
+            "item": "op_tools:diamondillium_ingot"
+        },
+        "n": {
+            "item": "op_tools:refined_darkmatter"
+        }
     },
     "result": {
-        "id": "op-tools:diamondium_ingot",
+        "id": "op_tools:diamondium_ingot",
         "count": 1
     },
     "group": "diamondium_ingot"

@@ -6,10 +6,12 @@
         "###"
     ],
     "key": {
-        "#": "op-tools:diamondium_ingot"
+        "#": {
+            "item": "op_tools:diamondium_ingot"
+        }
     },
     "result": {
-        "id": "op-tools:diamondium_block",
+        "id": "op_tools:diamondium_block",
         "count": 1
     }
 }
