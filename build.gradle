@@ -96,6 +96,7 @@ tasks.withType(JavaCompile).configureEach {
 
 def modId = mod_id
 jar {
+    archiveFileName.set("${mod_id}-${mod_version}+${minecraft_version}.jar")
     from('LICENSE') {
         rename { "${it}_${modId}" }
     }
