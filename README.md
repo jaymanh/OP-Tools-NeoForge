@@ -6,9 +6,9 @@ This is the **NeoForge** edition of OP Tools. The Fabric version lives at [OP-To
 
 ## Supported versions
 
-| Minecraft | NeoForge | Mod version | Branch |
-|-----------|----------|-------------|--------|
-| 1.21.11   | 21.11.42 | 1.8.2       | `1.21.11` |
+| Minecraft | NeoForge | Mod version |
+|-----------|----------|-------------|
+| 1.21.11   | 21.11.42 | 1.8.2       |
 
 ## Modrinth
 
