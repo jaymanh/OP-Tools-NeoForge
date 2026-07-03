@@ -2,6 +2,7 @@ package jaymanh.optools;
 
 import com.mojang.logging.LogUtils;
 import jaymanh.optools.Armor.ModArmor;
+import jaymanh.optools.Armor.ModArmorMaterials;
 import jaymanh.optools.Blocks.BlockEntitys.ModBlockEntitys;
 import jaymanh.optools.Blocks.ModBlocks;
 import jaymanh.optools.Enchantments.*;
@@ -60,6 +61,7 @@ public class OpTools {
 
 		ensureDeferredRegistrations();
 
+		ModArmorMaterials.ARMOR_MATERIALS.register(modEventBus);
 		BLOCKS.register(modEventBus);
 		ITEMS.register(modEventBus);
 		BLOCK_ENTITY_TYPES.register(modEventBus);
@@ -82,6 +84,7 @@ public class OpTools {
 	}
 
 	private static void ensureDeferredRegistrations() {
+		ModArmorMaterials.DIAMONDILLIUM.getId();
 		ModTools.DIAMONDIUM_SWORD.getId();
 		ModTools.OP_TOOLS_ITEM_GROUP.getId();
 		ModBlocks.REFINERY.getId();

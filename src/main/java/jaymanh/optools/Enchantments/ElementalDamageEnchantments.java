@@ -69,7 +69,7 @@ public class ElementalDamageEnchantments {
         OpTools.register(ResourceLocation.parse("elemental_ice"), (world, level, context, user, pos) -> {
             //I should probably make my own effect here so it can be a more gradual thing that builds up slowly and wears off slowly
             if(user instanceof LivingEntity mob){
-                mob.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 100, level));
+                mob.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, level));
             }
         });
     }

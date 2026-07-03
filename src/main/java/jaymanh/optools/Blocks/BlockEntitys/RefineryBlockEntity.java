@@ -5,7 +5,9 @@ import jaymanh.optools.GUI.Screen.RefineryScreenHandler;
 import jaymanh.optools.Items.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.ContainerHelper;
@@ -20,8 +22,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.storage.ValueInput;
-import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.common.extensions.IPlayerExtension;
 import org.jetbrains.annotations.Nullable;
 
@@ -74,17 +74,19 @@ public class RefineryBlockEntity extends BaseContainerBlockEntity implements Men
     }
 
     @Override
-    protected void saveAdditional(ValueOutput writeView) {
-        super.saveAdditional(writeView);
-        ContainerHelper.saveAllItems(writeView, this.inventory);
-        writeView.putInt("refinery.progress", 0);
+    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+        super.saveAdditional(tag, registries);
+        ContainerHelper.saveAllItems(tag, this.inventory, registries);
+        tag.putInt("refinery.progress", this.progress);
     }
 
     @Override
-    public void loadAdditional(ValueInput readView) {
-        super.loadAdditional(readView);
-        ContainerHelper.loadAllItems(readView, this.inventory);
-        readView.getInt("refinery.progress").ifPresent(progress -> this.progress = progress);
+    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+        super.loadAdditional(tag, registries);
+        ContainerHelper.loadAllItems(tag, this.inventory, registries);
+        if (tag.contains("refinery.progress")) {
+            this.progress = tag.getInt("refinery.progress");
+        }
     }
 
     @Override

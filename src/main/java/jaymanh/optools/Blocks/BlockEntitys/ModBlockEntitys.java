@@ -8,5 +8,5 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 public class ModBlockEntitys {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<RefineryBlockEntity>> REFINERY_BLOCK_ENTITY =
             OpTools.BLOCK_ENTITY_TYPES.register("refinery",
-                    () -> new BlockEntityType<>(RefineryBlockEntity::new, ModBlocks.REFINERY.get()));
+                    () -> BlockEntityType.Builder.of(RefineryBlockEntity::new, ModBlocks.REFINERY.get()).build(null));
 }

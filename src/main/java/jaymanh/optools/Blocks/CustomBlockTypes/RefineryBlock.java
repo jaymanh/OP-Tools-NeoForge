@@ -42,25 +42,30 @@ public class RefineryBlock extends BaseEntityBlock implements EntityBlock {
     }
 
     @Override
-    public void affectNeighborsAfterRemoval(BlockState state, ServerLevel serverWorld, BlockPos pos, boolean moved) {
-        if (state.getBlock() != serverWorld.getBlockState(pos).getBlock()) {
-            BlockEntity blockEntity = serverWorld.getBlockEntity(pos);
+    protected void onRemove(BlockState state, Level world, BlockPos pos, BlockState newState, boolean moved) {
+        if (!state.is(newState.getBlock())) {
+            BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof RefineryBlockEntity refinery) {
-                Containers.dropContents(serverWorld, pos, refinery);
-                serverWorld.updateNeighbourForOutputSignal(pos, this);
+                if (world instanceof ServerLevel serverLevel) {
+                    Containers.dropContents(serverLevel, pos, refinery);
+                }
+                world.updateNeighbourForOutputSignal(pos, this);
             }
-            super.affectNeighborsAfterRemoval(state, serverWorld, pos, moved);
+            super.onRemove(state, world, pos, newState, moved);
         }
     }
 
+    @Override
     protected boolean hasAnalogOutputSignal(BlockState state) {
         return true;
     }
 
-    protected int getComparatorOutput(BlockState state, Level world, BlockPos pos) {
+    @Override
+    protected int getAnalogOutputSignal(BlockState state, Level world, BlockPos pos) {
         return AbstractContainerMenu.getRedstoneSignalFromBlockEntity(world.getBlockEntity(pos));
     }
 
+    @Override
     protected InteractionResult useWithoutItem(BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
         if (!world.isClientSide() && player instanceof ServerPlayer serverPlayer) {
             BlockEntity blockEntity = world.getBlockEntity(pos);

@@ -1,7 +1,6 @@
 package jaymanh.optools.Enchantments;
 
 import net.minecraft.core.Holder;
-import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -16,7 +15,6 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.tick.LevelTickEvent;
 
-import java.util.Optional;
 import java.util.Random;
 import java.util.function.Consumer;
 
@@ -38,9 +36,7 @@ public class AutoRepairEnchantment {
         for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
             ItemStack itemStack = player.getInventory().getItem(i);
             RegistryAccess drm = world.registryAccess();
-            Registry<Enchantment> reg = drm.lookupOrThrow(Registries.ENCHANTMENT);
-            Optional<Holder<Enchantment>> optional = Optional.ofNullable(reg.wrapAsHolder(reg.getValue(AUTO_REPAIR)));
-            Holder<Enchantment> autoRepair = optional.orElseThrow();
+            Holder<Enchantment> autoRepair = drm.lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(AUTO_REPAIR);
             int level = EnchantmentHelper.getItemEnchantmentLevel(autoRepair, itemStack);
             if (level > 0) {
                 int chance = Math.max(level / 2, 1);
