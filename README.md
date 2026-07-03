@@ -8,7 +8,7 @@ This is the **NeoForge** edition of OP Tools. The Fabric version lives at [OP-To
 
 | Minecraft | NeoForge | Mod version |
 |-----------|----------|-------------|
-| 26.1.2    | 26.1.2.76 | 1.8.2 |
+| 26.1.2    | 26.1.2.76 | 1.8.3 |
 
 ## Modrinth
 
@@ -38,7 +38,7 @@ Requirements: **Java 25**, Gradle (wrapper included).
 ./gradlew runServer  # run a dev server
 ```
 
-Built JAR output: `build/libs/op_tools-<version>+<minecraft>.jar` (e.g. `op_tools-1.8.2+26.1.2.jar`)
+Built JAR output: `build/libs/op_tools-<version>+<minecraft>.jar` (e.g. `op_tools-1.8.3+26.1.2.jar`)
 
 ## Issues
 
