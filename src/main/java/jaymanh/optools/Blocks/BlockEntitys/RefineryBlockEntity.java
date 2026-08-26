@@ -77,7 +77,7 @@ public class RefineryBlockEntity extends BaseContainerBlockEntity implements Men
     protected void saveAdditional(ValueOutput writeView) {
         super.saveAdditional(writeView);
         ContainerHelper.saveAllItems(writeView, this.inventory);
-        writeView.putInt("refinery.progress", 0);
+        writeView.putInt("refinery.progress", this.progress);
     }
 
     @Override
@@ -104,6 +104,9 @@ public class RefineryBlockEntity extends BaseContainerBlockEntity implements Men
 
     @Override
     protected void setItems(NonNullList<ItemStack> inventory) {
+        for (int i = 0; i < this.inventory.size(); i++) {
+            this.inventory.set(i, i < inventory.size() ? inventory.get(i) : ItemStack.EMPTY);
+        }
     }
 
     @Nullable
@@ -154,6 +157,24 @@ public class RefineryBlockEntity extends BaseContainerBlockEntity implements Men
         } else {
             return side == Direction.UP ? TOP_SLOTS : SIDE_SLOTS;
         }
+    }
+
+    @Override
+    public boolean canPlaceItem(int slot, ItemStack stack) {
+        if (slot == OUTPUT_SLOT) {
+            return false;
+        }
+        return stack.getItem() == ModItems.RAW_DARKMATTER.get();
+    }
+
+    @Override
+    public boolean canPlaceItemThroughFace(int slot, ItemStack stack, @Nullable Direction dir) {
+        return this.canPlaceItem(slot, stack);
+    }
+
+    @Override
+    public boolean canTakeItemThroughFace(int slot, ItemStack stack, Direction dir) {
+        return slot == OUTPUT_SLOT;
     }
 
     private void craftItem() {
