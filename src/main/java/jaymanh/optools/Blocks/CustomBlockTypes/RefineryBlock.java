@@ -43,14 +43,7 @@ public class RefineryBlock extends BaseEntityBlock implements EntityBlock {
 
     @Override
     public void affectNeighborsAfterRemoval(BlockState state, ServerLevel serverWorld, BlockPos pos, boolean moved) {
-        if (state.getBlock() != serverWorld.getBlockState(pos).getBlock()) {
-            BlockEntity blockEntity = serverWorld.getBlockEntity(pos);
-            if (blockEntity instanceof RefineryBlockEntity refinery) {
-                Containers.dropContents(serverWorld, pos, refinery);
-                serverWorld.updateNeighbourForOutputSignal(pos, this);
-            }
-            super.affectNeighborsAfterRemoval(state, serverWorld, pos, moved);
-        }
+        Containers.updateNeighboursAfterDestroy(state, serverWorld, pos);
     }
 
     protected boolean hasAnalogOutputSignal(BlockState state) {
