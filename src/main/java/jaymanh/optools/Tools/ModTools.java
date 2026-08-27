@@ -13,6 +13,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.HoeItem;
+import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
@@ -34,7 +35,7 @@ public class ModTools {
     public static final DeferredItem<Item> DIAMONDIUM_AXE = OpTools.ITEMS.register("diamondium_axe",
             () -> new AxeItem(ToolMaterials.DIAMONDIUM.getMaterial(), 15, 0.4f, new Item.Properties().rarity(Rarity.EPIC).fireResistant().setId(key("diamondium_axe"))));
     public static final DeferredItem<Item> DIAMONDIUM_SHOVEL = OpTools.ITEMS.register("diamondium_shovel",
-            () -> new Item(new Item.Properties().shovel(ToolMaterials.DIAMONDIUM.getMaterial(), 8, 0.5f).rarity(Rarity.EPIC).fireResistant().setId(key("diamondium_shovel"))));
+            () -> new ShovelItem(ToolMaterials.DIAMONDIUM.getMaterial(), 8, 0.5f, new Item.Properties().rarity(Rarity.EPIC).fireResistant().setId(key("diamondium_shovel"))));
     public static final DeferredItem<Item> DIAMONDIUM_HOE = OpTools.ITEMS.register("diamondium_hoe",
             () -> new HoeItem(ToolMaterials.DIAMONDIUM.getMaterial(), 7, 1f, new Item.Properties().rarity(Rarity.EPIC).fireResistant().setId(key("diamondium_hoe"))));
 
@@ -45,7 +46,7 @@ public class ModTools {
     public static final DeferredItem<Item> DIAMONDILLIUM_AXE = OpTools.ITEMS.register("diamondillium_axe",
             () -> new AxeItem(ToolMaterials.DIAMONDILLIUM.getMaterial(), 15, 0.4f, new Item.Properties().rarity(Rarity.RARE).fireResistant().setId(key("diamondillium_axe"))));
     public static final DeferredItem<Item> DIAMONDILLIUM_SHOVEL = OpTools.ITEMS.register("diamondillium_shovel",
-            () -> new Item(new Item.Properties().shovel(ToolMaterials.DIAMONDILLIUM.getMaterial(), 8, 0.5f).rarity(Rarity.RARE).fireResistant().setId(key("diamondillium_shovel"))));
+            () -> new ShovelItem(ToolMaterials.DIAMONDILLIUM.getMaterial(), 8, 0.5f, new Item.Properties().rarity(Rarity.RARE).fireResistant().setId(key("diamondillium_shovel"))));
     public static final DeferredItem<Item> DIAMONDILLIUM_HOE = OpTools.ITEMS.register("diamondillium_hoe",
             () -> new HoeItem(ToolMaterials.DIAMONDILLIUM.getMaterial(), 6, 1f, new Item.Properties().rarity(Rarity.RARE).fireResistant().setId(key("diamondillium_hoe"))));
 
