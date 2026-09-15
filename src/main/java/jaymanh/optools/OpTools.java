@@ -78,7 +78,6 @@ public class OpTools {
 		NeoForge.EVENT_BUS.register(new AutoRepairEnchantment());
 		NeoForge.EVENT_BUS.register(new EnchantTick());
 		NeoForge.EVENT_BUS.register(new EnchantEventHandler());
-		NeoForge.EVENT_BUS.addListener(ModFuels::registerFuelBurnTime);
 	}
 
 	private static void ensureDeferredRegistrations() {

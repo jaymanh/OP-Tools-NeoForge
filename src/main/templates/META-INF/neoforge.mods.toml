@@ -29,8 +29,8 @@ displayName="${mod_name}" #mandatory
 # A URL for the "homepage" for this mod, displayed in the mod UI
 displayURL="https://github.com/jaymanh/OP-Tools-NeoForge"
 
-# A file name (in the root of the mod JAR) containing a logo for display
-logoFile="icon.png"
+# Square icon shown in the mod list
+iconFile="icon.png"
 
 # The authors of the mod, displayed in the mod UI (optional)
 authors="Jaymanh"
