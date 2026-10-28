@@ -39,7 +39,11 @@ public class AutoRepairEnchantment {
 
     private static Optional<Holder<Enchantment>> enchantment(ServerLevel world) {
         Registry<Enchantment> registry = world.registryAccess().lookupOrThrow(Registries.ENCHANTMENT);
-        return registry.getHolder(ModEnchantments.AUTO_REPAIR).map(holder -> (Holder<Enchantment>) holder);
+        Enchantment value = registry.getValue(ModEnchantments.AUTO_REPAIR);
+        if (value == null) {
+            return Optional.empty();
+        }
+        return Optional.of(registry.wrapAsHolder(value));
     }
 
     private static void repairPlayer(ServerPlayer player, ServerLevel world, Holder<Enchantment> autoRepair) {
