@@ -24,7 +24,7 @@
         "affected": "victim",
         "effect": {
           "type": "op_tools:run_code",
-          "hook": "elemental_earth"
+          "hook": "op_tools:elemental_earth"
         }
       }
     ]
