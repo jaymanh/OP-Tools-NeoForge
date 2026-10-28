@@ -1,7 +1,6 @@
 package jaymanh.optools.Enchantments;
 
 import net.minecraft.core.Holder;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -38,8 +37,7 @@ public class AutoRepairEnchantment {
     }
 
     private static Optional<Holder<Enchantment>> enchantment(ServerLevel world) {
-        Registry<Enchantment> registry = world.registryAccess().lookupOrThrow(Registries.ENCHANTMENT);
-        return registry.getHolder(ModEnchantments.AUTO_REPAIR).map(holder -> (Holder<Enchantment>) holder);
+        return world.registryAccess().lookupOrThrow(Registries.ENCHANTMENT).get(ModEnchantments.AUTO_REPAIR).map(holder -> (Holder<Enchantment>) holder);
     }
 
     private static void repairPlayer(ServerPlayer player, ServerLevel world, Holder<Enchantment> autoRepair) {

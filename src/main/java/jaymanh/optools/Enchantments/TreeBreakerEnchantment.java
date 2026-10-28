@@ -3,7 +3,6 @@ package jaymanh.optools.Enchantments;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -51,8 +50,7 @@ public class TreeBreakerEnchantment {
     }
 
     private static Optional<Holder<Enchantment>> enchantment(ServerLevel world) {
-        Registry<Enchantment> registry = world.registryAccess().lookupOrThrow(Registries.ENCHANTMENT);
-        return registry.getHolder(ModEnchantments.TREE_BREAKER).map(holder -> (Holder<Enchantment>) holder);
+        return world.registryAccess().lookupOrThrow(Registries.ENCHANTMENT).get(ModEnchantments.TREE_BREAKER).map(holder -> (Holder<Enchantment>) holder);
     }
 
     private static void breakConnectedLogs(ServerLevel world, ServerPlayer player, BlockPos origin, Block log, ItemStack tool) {

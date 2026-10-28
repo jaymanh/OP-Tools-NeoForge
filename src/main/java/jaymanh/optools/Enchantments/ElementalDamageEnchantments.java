@@ -61,7 +61,7 @@ public class ElementalDamageEnchantments {
 
         OpTools.register(OpTools.hook("elemental_ice"), (world, level, context, user, pos) -> {
             if (user instanceof LivingEntity mob) {
-                mob.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 100, level));
+                mob.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, level));
             }
         });
     }
