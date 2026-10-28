@@ -3,6 +3,7 @@ package jaymanh.optools.Blocks.CustomBlockTypes;
 import jaymanh.optools.Blocks.BlockEntitys.ModBlockEntitys;
 import jaymanh.optools.Blocks.BlockEntitys.RefineryBlockEntity;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Containers;
@@ -40,14 +41,17 @@ public class RefineryBlock extends BaseEntityBlock implements EntityBlock {
         Containers.updateNeighboursAfterDestroy(state, serverWorld, pos);
     }
 
+    @Override
     protected boolean hasAnalogOutputSignal(BlockState state) {
         return true;
     }
 
-    protected int getComparatorOutput(BlockState state, Level world, BlockPos pos) {
+    @Override
+    protected int getAnalogOutputSignal(BlockState state, Level world, BlockPos pos, Direction direction) {
         return AbstractContainerMenu.getRedstoneSignalFromBlockEntity(world.getBlockEntity(pos));
     }
 
+    @Override
     protected InteractionResult useWithoutItem(BlockState state, Level world, BlockPos pos, Player player, BlockHitResult hit) {
         if (!world.isClientSide() && player instanceof ServerPlayer serverPlayer) {
             BlockEntity blockEntity = world.getBlockEntity(pos);
