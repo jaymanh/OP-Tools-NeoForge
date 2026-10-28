@@ -46,11 +46,13 @@ public class RefineryBlock extends BaseEntityBlock implements EntityBlock {
         Containers.updateNeighboursAfterDestroy(state, serverWorld, pos);
     }
 
+    @Override
     protected boolean hasAnalogOutputSignal(BlockState state) {
         return true;
     }
 
-    protected int getComparatorOutput(BlockState state, Level world, BlockPos pos) {
+    @Override
+    protected int getAnalogOutputSignal(BlockState state, Level world, BlockPos pos) {
         return AbstractContainerMenu.getRedstoneSignalFromBlockEntity(world.getBlockEntity(pos));
     }
 
