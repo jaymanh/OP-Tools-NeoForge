@@ -8,10 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EnchantEventHandler {
-
-    public static void initialise() {
-    }
-
     @SubscribeEvent
     public void onEndLevelTick(LevelTickEvent.Post event) {
         if (!(event.getLevel() instanceof ServerLevel serverWorld)) {
@@ -24,7 +20,7 @@ public class EnchantEventHandler {
             }
         }
         for (AutoReplantEnchantment.ReplantTask task : tasksToProcess) {
-            serverWorld.setBlockAndUpdate(task.pos(), task.block().defaultBlockState());
+            serverWorld.setBlockAndUpdate(task.pos(), task.state());
             AutoReplantEnchantment.getReplantTasks().remove(task);
         }
     }
