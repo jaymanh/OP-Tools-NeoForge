@@ -144,10 +144,11 @@ public class RefineryBlockEntity extends BaseContainerBlockEntity implements Men
                     this.craftItem();
                     this.resetProgress();
                 }
-            } else {
+            } else if (this.progress != 0) {
                 this.resetProgress();
+                setChanged(world, pos, state);
             }
-        } else {
+        } else if (this.progress != 0) {
             this.resetProgress();
             setChanged(world, pos, state);
         }
