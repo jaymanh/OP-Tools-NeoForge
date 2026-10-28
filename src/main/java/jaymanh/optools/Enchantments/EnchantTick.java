@@ -44,12 +44,12 @@ public class EnchantTick {
     }
 
     private static boolean hasGravityTimer(LivingEntity entity) {
-        return entity.getPersistentData().contains(GRAVITY_TICKS) || entityTags(entity).contains("Gravity");
+        return entity.getPersistentData().getInt(GRAVITY_TICKS).isPresent() || entity.getTags().contains("Gravity");
     }
 
     private static void tickGravity(Entity entity) {
         CompoundTag data = entity.getPersistentData();
-        int remaining = data.contains(GRAVITY_TICKS) ? data.getInt(GRAVITY_TICKS) : legacyRemaining(entity);
+        int remaining = data.getInt(GRAVITY_TICKS).orElseGet(() -> legacyRemaining(entity));
         stripLegacyTags(entity);
         if (remaining <= 1) {
             entity.setNoGravity(false);
@@ -60,7 +60,7 @@ public class EnchantTick {
     }
 
     private static int legacyRemaining(Entity entity) {
-        for (String tag : entityTags(entity)) {
+        for (String tag : entity.getTags()) {
             if (!tag.startsWith("Num")) {
                 continue;
             }
@@ -75,7 +75,7 @@ public class EnchantTick {
 
     private static void stripLegacyTags(Entity entity) {
         List<String> legacy = new ArrayList<>();
-        for (String tag : entityTags(entity)) {
+        for (String tag : entity.getTags()) {
             if ("Gravity".equals(tag) || tag.startsWith("Num")) {
                 legacy.add(tag);
             }
@@ -83,9 +83,5 @@ public class EnchantTick {
         for (String tag : legacy) {
             entity.removeTag(tag);
         }
-    }
-
-    private static Set<String> entityTags(Entity entity) {
-        return entity.getTags();
     }
 }
