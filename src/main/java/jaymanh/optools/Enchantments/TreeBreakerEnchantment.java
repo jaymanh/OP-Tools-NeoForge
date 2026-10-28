@@ -52,7 +52,11 @@ public class TreeBreakerEnchantment {
 
     private static Optional<Holder<Enchantment>> enchantment(ServerLevel world) {
         Registry<Enchantment> registry = world.registryAccess().lookupOrThrow(Registries.ENCHANTMENT);
-        return registry.getHolder(ModEnchantments.TREE_BREAKER).map(holder -> (Holder<Enchantment>) holder);
+        Enchantment value = registry.getValue(ModEnchantments.TREE_BREAKER);
+        if (value == null) {
+            return Optional.empty();
+        }
+        return Optional.of(registry.wrapAsHolder(value));
     }
 
     private static void breakConnectedLogs(ServerLevel world, ServerPlayer player, BlockPos origin, Block log, ItemStack tool) {
