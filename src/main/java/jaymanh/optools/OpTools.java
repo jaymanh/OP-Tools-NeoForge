@@ -42,6 +42,10 @@ public class OpTools {
 
 	private static final Map<Identifier, CodeRunner> registry = new HashMap<>();
 
+	public static Identifier hook(String path) {
+		return Identifier.fromNamespaceAndPath(MOD_ID, path);
+	}
+
 	public static void register(Identifier hook, CodeRunner code) {
 		registry.put(hook, code);
 	}
@@ -68,13 +72,10 @@ public class OpTools {
 
 		modEventBus.addListener(this::registerEnchantmentEffects);
 
-		TreeBreakerEnchantment.initialise();
-		AutoRepairEnchantment.initialise();
 		AutoReplantEnchantment.initialise();
 		ElementalDamageEnchantments.initialise();
-		EnchantTick.initialise();
-		EnchantEventHandler.initialise();
 
+		NeoForge.EVENT_BUS.register(new TreeBreakerEnchantment());
 		NeoForge.EVENT_BUS.register(new AutoRepairEnchantment());
 		NeoForge.EVENT_BUS.register(new EnchantTick());
 		NeoForge.EVENT_BUS.register(new EnchantEventHandler());

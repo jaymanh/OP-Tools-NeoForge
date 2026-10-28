@@ -22,7 +22,7 @@
       {
         "effect": {
             "type": "op_tools:run_code",
-          "hook": "crop_break"
+          "hook": "op_tools:crop_break"
         }
       }
     ]
