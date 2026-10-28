@@ -34,6 +34,10 @@ base {
     archivesName = mod_id
 }
 
+sourceSets {
+    client
+}
+
 // Mojang ships Java 25 to end users in 26.3, so mods should target Java 25.
 java.toolchain.languageVersion = JavaLanguageVersion.of(25)
 
@@ -94,12 +98,15 @@ neoForge {
         }
     }
 
+    addModdingDependenciesTo sourceSets.client
+
     mods {
         // define mod <-> source bindings
         // these are used to tell the game which sources are for which mod
         // multi mod projects should define one per mod
         "${mod_id}" {
             sourceSet(sourceSets.main)
+            sourceSet(sourceSets.client)
         }
     }
 }
@@ -113,6 +120,7 @@ configurations {
 }
 
 dependencies {
+    clientImplementation sourceSets.main.output
     // Example optional mod dependency with JEI
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
     // compileOnly "mezz.jei:jei-${mc_version}-common-api:${jei_version}"
@@ -180,6 +188,7 @@ tasks.withType(JavaCompile).configureEach {
 def modId = mod_id
 jar {
     archiveFileName.set("${mod_id}-${mod_version}+${minecraft_version}.jar")
+    from(sourceSets.client.output)
     from('LICENSE') {
         rename { "${it}_${modId}" }
     }
