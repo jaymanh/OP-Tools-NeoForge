@@ -2,24 +2,26 @@ package jaymanh.optools.Enchantments;
 
 import jaymanh.optools.OpTools;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.enchantment.EnchantedItemInUse;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.block.state.properties.Property;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static jaymanh.optools.OpTools.LOGGER;
-import static jaymanh.optools.Enchantments.InventoryHelper.*;
+import static jaymanh.optools.Enchantments.InventoryHelper.findItemSlot;
+import static jaymanh.optools.Enchantments.InventoryHelper.hasItemInInventory;
+import static jaymanh.optools.Enchantments.InventoryHelper.removeItemInInventory;
 
 public class AutoReplantEnchantment {
 
@@ -27,7 +29,7 @@ public class AutoReplantEnchantment {
 
     private static final List<ReplantTask> replantTasks = new ArrayList<>();
 
-    static record ReplantTask(ServerLevel world, BlockPos pos, Block block) {}
+    static record ReplantTask(ServerLevel world, BlockPos pos, BlockState state) {}
 
     static {
         blockToItemMap.put(Blocks.WHEAT, Items.WHEAT_SEEDS);
@@ -40,35 +42,49 @@ public class AutoReplantEnchantment {
         blockToItemMap.put(Blocks.COCOA, Items.COCOA_BEANS);
     }
 
-    private static void scheduleReplant(BlockPos blockPos, Block blockType, ServerLevel world, int level, EnchantedItemInUse context, Entity user) {
-        Item item = blockToItemMap.get(blockType);
-        if (item != null) {
-            Player player = (Player) user;
-            ItemStack itemStack = new ItemStack(item);
-
-            if (hasItemInInventory(player, itemStack)) {
-                int itemSlot = findItemSlot(player, itemStack);
-                removeItemInInventory(player, itemSlot);
-                replantTasks.add(new ReplantTask(world, blockPos, blockType));
+    private static BlockState replantState(BlockState broken) {
+        BlockState state = broken.getBlock().defaultBlockState();
+        if (broken.hasProperty(BlockStateProperties.HORIZONTAL_FACING) && state.hasProperty(BlockStateProperties.HORIZONTAL_FACING)) {
+            state = state.setValue(BlockStateProperties.HORIZONTAL_FACING, broken.getValue(BlockStateProperties.HORIZONTAL_FACING));
+        }
+        for (Property<?> property : state.getProperties()) {
+            if (property instanceof IntegerProperty age && "age".equals(age.getName())) {
+                state = setAge(state, age);
             }
         }
+        return state;
+    }
+
+    private static BlockState setAge(BlockState state, IntegerProperty age) {
+        return state.setValue(age, 0);
+    }
+
+    private static void scheduleReplant(BlockPos blockPos, BlockState planted, ServerLevel world, Player player) {
+        Item item = blockToItemMap.get(planted.getBlock());
+        if (item == null) {
+            return;
+        }
+        ItemStack itemStack = new ItemStack(item);
+        if (!hasItemInInventory(player, itemStack)) {
+            return;
+        }
+        int itemSlot = findItemSlot(player, itemStack);
+        removeItemInInventory(player, itemSlot);
+        replantTasks.add(new ReplantTask(world, blockPos, planted));
     }
 
     public static void initialise() {
-        OpTools.register(ResourceLocation.parse("crop_break"), (world, level, context, user, pos) -> {
-            BlockPos blockPos = new BlockPos(
-                    (int) Math.floor(pos.x),
-                    (int) Math.floor(pos.y),
-                    (int) Math.floor(pos.z)
-            );
-
-            Block block = world.getBlockState(blockPos).getBlock();
-
-            if (world.getBlockState(blockPos).is(BlockTags.CROPS)) {
-                ((ServerLevel) world).getServer().execute(() -> {
-                    scheduleReplant(blockPos, block, (ServerLevel) world, level, context, user);
-                });
+        OpTools.register(OpTools.hook("crop_break"), (world, level, context, user, pos) -> {
+            if (!(user instanceof Player player)) {
+                return;
             }
+            BlockPos blockPos = BlockPos.containing(pos);
+            BlockState broken = world.getBlockState(blockPos);
+            if (!blockToItemMap.containsKey(broken.getBlock())) {
+                return;
+            }
+            BlockState planted = replantState(broken);
+            world.getServer().execute(() -> scheduleReplant(blockPos, planted, world, player));
         });
     }
 
