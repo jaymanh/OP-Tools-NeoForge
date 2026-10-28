@@ -3,17 +3,19 @@ package jaymanh.optools.Enchantments;
 import jaymanh.optools.OpTools;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
-import static jaymanh.optools.OpTools.LOGGER;
+import java.util.List;
 
 public class ElementalDamageEnchantments {
 
@@ -32,45 +34,47 @@ public class ElementalDamageEnchantments {
         }
     }
 
-
-
-    public static void initialise(){
-        OpTools.register(ResourceLocation.parse("elemental_fire"), (world, level, context, user, pos) -> {
-            BlockPos victimBlockPos = user.blockPosition();
-            level--;
-            createFireRadius(victimBlockPos, world, level);
-            //world.setBlockState(victimBlockPos, Blocks.FIRE.getDefaultState());
+    public static void initialise() {
+        OpTools.register(OpTools.hook("elemental_fire"), (world, level, context, user, pos) -> {
+            createFireRadius(user.blockPosition(), world, level);
         });
 
-        OpTools.register(ResourceLocation.parse("elemental_water"), (world, level, context, user, pos) -> {
-            user.setDeltaMovement(user.getDeltaMovement().x,0.02,user.getDeltaMovement().z);
-            user.setNoGravity(true);
-            user.addTag("Gravity");
-            user.addTag("Num0");
-            world.sendParticles(ParticleTypes.BUBBLE, user.getX(), user.getY(), user.getZ(), 100, 0.5,1,0.5,10);
+        OpTools.register(OpTools.hook("elemental_water"), (world, level, context, user, pos) -> {
+            user.setDeltaMovement(user.getDeltaMovement().x, 0.02, user.getDeltaMovement().z);
+            EnchantTick.suspendGravity(user);
+            world.sendParticles(ParticleTypes.BUBBLE, user.getX(), user.getY(), user.getZ(), 100, 0.5, 1, 0.5, 10);
         });
 
-        OpTools.register(ResourceLocation.parse("elemental_earth"), (world, level, context, user, pos) -> {
-            user.setDeltaMovement(0,0,0);
-            user.setPosRaw(user.getX(), user.getY() - (0.8 * level), user.getZ());
-            if(user instanceof Mob mob){
+        OpTools.register(OpTools.hook("elemental_earth"), (world, level, context, user, pos) -> {
+            burySafely(world, user, level);
+            if (user instanceof Mob mob) {
                 mob.getNavigation().stop();
             }
         });
 
-        OpTools.register(ResourceLocation.parse("elemental_lightning"), (world, level, context, user, pos) -> {
-            //LOGGER.info("test");
+        OpTools.register(OpTools.hook("elemental_lightning"), (world, level, context, user, pos) -> {
             LightningBolt lightning = new LightningBolt(EntityType.LIGHTNING_BOLT, world);
             lightning.setPos(user.getX(), user.getY(), user.getZ());
             lightning.setVisualOnly(false);
             world.addFreshEntity(lightning);
         });
 
-        OpTools.register(ResourceLocation.parse("elemental_ice"), (world, level, context, user, pos) -> {
-            //I should probably make my own effect here so it can be a more gradual thing that builds up slowly and wears off slowly
-            if(user instanceof LivingEntity mob){
-                mob.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, level));
+        OpTools.register(OpTools.hook("elemental_ice"), (world, level, context, user, pos) -> {
+            if (user instanceof LivingEntity mob) {
+                mob.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 100, level));
             }
         });
+    }
+
+    private static void burySafely(Level world, Entity user, int level) {
+        user.setDeltaMovement(Vec3.ZERO);
+        double distance = 0.8 * Math.max(level, 0);
+        if (distance <= 0) {
+            return;
+        }
+        Vec3 allowed = Entity.collideBoundingBox(user, new Vec3(0, -distance, 0), user.getBoundingBox(), world, List.<VoxelShape>of());
+        if (allowed.y != 0.0) {
+            user.teleportTo(user.getX() + allowed.x, user.getY() + allowed.y, user.getZ() + allowed.z);
+        }
     }
 }

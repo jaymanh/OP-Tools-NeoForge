@@ -26,8 +26,8 @@ public class ModArmorMaterials {
             () -> new ArmorMaterial(
                     Map.of(
                             ArmorItem.Type.BOOTS, 5,
-                            ArmorItem.Type.LEGGINGS, 9,
-                            ArmorItem.Type.CHESTPLATE, 7,
+                            ArmorItem.Type.LEGGINGS, 7,
+                            ArmorItem.Type.CHESTPLATE, 9,
                             ArmorItem.Type.HELMET, 4
                     ),
                     24,
@@ -42,8 +42,8 @@ public class ModArmorMaterials {
             () -> new ArmorMaterial(
                     Map.of(
                             ArmorItem.Type.BOOTS, 7,
-                            ArmorItem.Type.LEGGINGS, 15,
-                            ArmorItem.Type.CHESTPLATE, 11,
+                            ArmorItem.Type.LEGGINGS, 11,
+                            ArmorItem.Type.CHESTPLATE, 15,
                             ArmorItem.Type.HELMET, 6
                     ),
                     24,
