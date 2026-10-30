@@ -14,6 +14,9 @@ This is the **NeoForge** edition of OP Tools. The Fabric version lives at [OP-To
 
 [OP Tools](https://modrinth.com/mod/op-tools)
 
+## CurseForge 
+[OP Tools](https://www.curseforge.com/minecraft/mc-mods/op-tools-jaymanh)
+
 ## Features
 
 ### Foods and fuels
